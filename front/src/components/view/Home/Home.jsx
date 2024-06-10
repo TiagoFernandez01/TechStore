@@ -10,6 +10,8 @@ import { TbTruckDelivery } from "react-icons/tb";
 import { BsFillBoxSeamFill } from "react-icons/bs";
 import { BiSolidOffer } from "react-icons/bi";
 import { LuWatch } from "react-icons/lu";
+import BuyForCateories from "../BuyForCategories/BuyForCategories.jsx"
+
 
 const images = [
     Image1, Image2, Image3
@@ -79,9 +81,10 @@ const Home = () => {
                         </div>
 
                     </div>
+                </section>
 
-
-
+                <section>
+                    <BuyForCateories/>
                 </section>
 
             </body>

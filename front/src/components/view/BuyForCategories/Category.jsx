@@ -1,13 +1,10 @@
-import { Link } from "react-router-dom"
 
-const Category = ({name, id, image}) =>{
+
+const Category = ({ name, image }) => {
     return (
-        <div>
-            <Link to={`/categories/${id}`}>
-                <img src={image} alt="image" className="" />
-
-                <h1 className="">{name}</h1>
-            </Link>
+        <div className="flex flex-col items-center justify-center">
+            <h1 className="text-3xl">{name}</h1>
+            <img className ="rounded-full w-80 h-80 bg-purple-600" src={image} alt="image" />
         </div>
     );
 }
