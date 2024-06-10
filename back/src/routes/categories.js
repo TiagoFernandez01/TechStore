@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        const { name } = req.body;
+        const { name, image } = req.body;
         console.log(name)
         // Verificar si se proporciona el nombre de la categoría
         if (!name) {
@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
         }
 
         // Crear la categoría
-        const category = await Categories.create({ name });
+        const category = await Categories.create({ name, image });
 
         // Enviar la respuesta con la categoría creada
         res.status(200).json(category);
@@ -54,6 +54,32 @@ router.delete('/', async (req, res) => {
         res.status(200).json({ message: 'Category deleted successfully' });
     } catch (error) {
         // Manejar cualquier error que ocurra durante la eliminación de la categoría
+        res.status(400).json({ error: error.message });
+    }
+});
+
+router.put('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { image } = req.body;
+
+        if (!image) {
+            return res.status(400).json({ error: 'Image is required' });
+        }
+
+        // Buscar la categoría por ID
+        const category = await Categories.findByPk(id);
+
+        if (!category) {
+            return res.status(404).json({ error: 'Category not found' });
+        }
+
+        // Actualizar la imagen de la categoría
+        category.image = image;
+        await category.save();
+
+        res.status(200).json({ message: 'Category image updated successfully', category });
+    } catch (error) {
         res.status(400).json({ error: error.message });
     }
 });
